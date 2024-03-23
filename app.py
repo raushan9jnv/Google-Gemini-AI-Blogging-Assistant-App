@@ -75,17 +75,20 @@ with st.sidebar:
     submit_button = st.button("Generate Blog")
 
 if submit_button:
-    # image_response = client.images.generate(
-    # model="dall-e-3",
-    # prompt=f"Generate a blog post image on the title {blog_title}",
-    # size="1024x1024",
-    # quality="standard",
-    # n=1,
-    # )
 
-    # image_url = image_response.data[0].url
-    # st.image(image_url,caption="Generated Image")
+    #comment this block if you don't have openai key for image generation
+    image_response = client.images.generate(
+    model="dall-e-3",
+    prompt=f"Generate a blog post image on the title {blog_title}",
+    size="1024x1024",
+    quality="standard",
+    n=1,
+    )
 
+    image_url = image_response.data[0].url
+    st.image(image_url,caption="Generated Image")
+
+    #blog generate
     blog_response = model.generate_content(prompt_parts)
     st.title("YOUR BLOG POST:")
     st.write(blog_response.text)
