@@ -5,6 +5,9 @@ In this project, you will Building a AI Blogging Assistant using New Google Gemi
 
 BlogCraft is an AI-powered tool that helps you craft perfect blogs effortlessly. It uses the power of AI to generate engaging blog posts based on your inputs.
 
+![image](https://github.com/raushan9jnv/Google-Gemini-AI-Blogging-Assistant-App/assets/86125144/eacde5dc-85b9-4b8c-bb1b-b6f4be0230dd)
+
+
 ## Setup
 1. Install the required packages using `pip install -r requirements.txt`.
 2. Obtain API keys for Google's Generative AI and OpenAI's DALL-E 3 Image generation services.
