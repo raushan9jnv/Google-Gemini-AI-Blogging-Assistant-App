@@ -27,4 +27,4 @@ BlogCraft is an AI-powered tool that helps you craft perfect blogs effortlessly.
 - google-generativeai
 - openai
 
-##Thanks for using BlogCraft!
+## Thanks for using BlogCraft!
