@@ -1,8 +1,12 @@
-import streamlit as st
-import google.generativeai as genai
-from apikey import google_gemini_api_key
+import streamlit as st # for ui interface
 
-# Set up the model
+import google.generativeai as genai # for blog generation
+from openai import OpenAI # for DALLE 3 Image generation
+
+from apikey import google_gemini_api_key, openapi_api_keys  #gemini free, dalle 3 paid
+
+# #setting up our model
+client = OpenAI(api_key= openapi_api_keys)
 genai.configure(api_key= google_gemini_api_key)
 
 generation_config = {
@@ -31,10 +35,11 @@ safety_settings = [
   },
 ]
 
-#setting up our model
 model = genai.GenerativeModel(model_name="gemini-1.0-pro",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
+
+#setting up ui interface
 
 #set app to wide mode
 st.set_page_config(layout='wide')
@@ -65,11 +70,22 @@ with st.sidebar:
     prompt_parts= [
         f"generate a comprehensivee, engaging blog post relevant to the given title \"{blog_title}\" and keywords \"{keywords}\". make sure to incorporate these keywords in the blog post. the blog should be approximately {num_words} words in length, suitable for an online audience. ensure the content is original, informative, and maintains a consist tone throughout."]
 
-    response = model.generate_content(prompt_parts)
+    
     #submit button
     submit_button = st.button("Generate Blog")
 
 if submit_button:
-    # st.image("https://avatars.githubusercontent.com/u/86125144?v=4")
+    # image_response = client.images.generate(
+    # model="dall-e-3",
+    # prompt=f"Generate a blog post image on the title {blog_title}",
+    # size="1024x1024",
+    # quality="standard",
+    # n=1,
+    # )
 
-    st.write(response.text)
+    # image_url = image_response.data[0].url
+    # st.image(image_url,caption="Generated Image")
+
+    blog_response = model.generate_content(prompt_parts)
+    st.title("YOUR BLOG POST:")
+    st.write(blog_response.text)
